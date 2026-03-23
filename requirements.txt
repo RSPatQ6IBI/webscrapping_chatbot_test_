@@ -1,0 +1,7 @@
+requests
+beautifulsoup4
+faiss-cpu
+google-generativeai
+sentence-transformers
+networkx
+transformers

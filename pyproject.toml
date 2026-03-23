@@ -1,0 +1,15 @@
+
+[project_details]
+project_name = ""
+
+
+[database_details]
+db_name = "postgres"
+db_user = "postgres"
+db_pswd = "postgre@123"
+
+[gemini_llm]
+key_name = "Gemini API Key - LANGCHAIN"
+key_value = "AIzaSyAEtGbkkqLOuxrePIdeq2L4zw0AE9vmcdc"
+generation_model_name = "Gemini 2.5 Flash"
+embedding_model_name = "gemini-embedding-001"
