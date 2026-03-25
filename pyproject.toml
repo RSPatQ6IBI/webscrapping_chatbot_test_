@@ -9,7 +9,6 @@ db_user = "postgres"
 db_pswd = "postgre@123"
 
 [gemini_llm]
-key_name = "Gemini API Key - LANGCHAIN"
 generation_model_name = "gemini-pro"
 embedding_model_name = "gemini-embedding-001"
 
