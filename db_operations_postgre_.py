@@ -12,7 +12,10 @@ def create_table_in_postgre_():
     # Access specific fields
     db_name_ = data["database_details"]["db_name"]
     db_user_ = data["database_details"]["db_user"]
-    db_password_ = data["database_details"]["db_pswd"]
+    from dotenv import load_dotenv
+    import os
+    load_dotenv()
+    db_password_ = os.getenv('POSTGRE_DB_PASSWORD')
 
 
     try:
@@ -58,7 +61,10 @@ def insert_data_into_postgre_(data_dict_):
     # Access specific fields
     db_name_ = data["database_details"]["db_name"]
     db_user_ = data["database_details"]["db_user"]
-    db_password_ = data["database_details"]["db_pswd"]
+    from dotenv import load_dotenv
+    import os
+    load_dotenv()
+    db_password_ = os.getenv('POSTGRE_DB_PASSWORD')
 
     try:
         conn = psycopg2.connect(
@@ -108,7 +114,10 @@ def fetch_data_from_postgre_():
     # Access specific fields
     db_name_ = data["database_details"]["db_name"]
     db_user_ = data["database_details"]["db_user"]
-    db_password_ = data["database_details"]["db_pswd"]
+    from dotenv import load_dotenv
+    import os
+    load_dotenv()
+    db_password_ = os.getenv('POSTGRE_DB_PASSWORD')
 
     try:
         conn = psycopg2.connect(
@@ -149,7 +158,10 @@ def fetch_col_names():
     # Access specific fields
     db_name_ = data["database_details"]["db_name"]
     db_user_ = data["database_details"]["db_user"]
-    db_password_ = data["database_details"]["db_pswd"]
+    from dotenv import load_dotenv
+    import os
+    load_dotenv()
+    db_password_ = os.getenv('POSTGRE_DB_PASSWORD')
 
     conn = psycopg2.connect(
         host="localhost",

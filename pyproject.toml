@@ -6,10 +6,9 @@ project_name = ""
 [database_details]
 db_name = "postgres"
 db_user = "postgres"
-db_pswd = "postgre@123"
 
 [gemini_llm]
-generation_model_name = "gemini-pro"
+generation_model_name = "gemini-2.5-flash"
 embedding_model_name = "gemini-embedding-001"
 
 [openai]

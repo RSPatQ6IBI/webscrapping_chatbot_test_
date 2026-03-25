@@ -2,6 +2,9 @@
 
 from langchain_chroma import Chroma
 from langchain_classic.chains import RetrievalQA
+from dotenv import load_dotenv
+import os
+load_dotenv()
 
 def get_relevant_passage(query, db):
   passage = db.query(query_texts=[query], n_results=1)['documents'][0][0]
@@ -19,11 +22,12 @@ with open("pyproject.toml", "rb") as f:
 # Access specific fields
 # generation_llm_name_ = data["gemini_llm"]["generation_model_name"]
 embedding_llm_name_ = data["gemini_llm"]["embedding_model_name"]
-gemini_llm_key_ = data["gemini_llm"]["key_value"]
-openai_llm_key_ = data['openai']['openai_key_value']
+gemini_llm_key_ = os.getenv('GEMINI_API_KEY')
+openai_llm_key_ = os.getenv('OPENAI_API_KEY')
+db_password_ = os.getenv('POSTGRE_DB_PASSWORD')
+
 #-_-_-_--_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
 generation_llm_name_= "gemini-2.5-flash" # "gemini-3.1-pro-preview"
-
 
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 google_embeddings = GoogleGenerativeAIEmbeddings(model="models/gemini-embedding-001", api_key=gemini_llm_key_)
