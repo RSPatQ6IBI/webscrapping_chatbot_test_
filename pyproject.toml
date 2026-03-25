@@ -14,4 +14,3 @@ generation_model_name = "gemini-pro"
 embedding_model_name = "gemini-embedding-001"
 
 [openai]
-
