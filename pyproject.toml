@@ -10,6 +10,9 @@ db_pswd = "postgre@123"
 
 [gemini_llm]
 key_name = "Gemini API Key - LANGCHAIN"
-key_value = "AIzaSyAEtGbkkqLOuxrePIdeq2L4zw0AE9vmcdc"
-generation_model_name = "Gemini 2.5 Flash"
+key_value = "AIzaSyC509o8xaxEsHtEA-8LOS2K2rpK_RZLdw4"
+generation_model_name = "gemini-pro"
 embedding_model_name = "gemini-embedding-001"
+
+[openai]
+openai_key_value = "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"

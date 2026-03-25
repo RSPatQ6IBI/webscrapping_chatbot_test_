@@ -12,9 +12,9 @@ class WebScraper:
         self.scrape()
 
     def extract_html_data_to_dict_(self):
-        print(self.the_soup_.title)
+        # print(self.the_soup_.title)
         page_title = self.the_soup_.title.text.strip() if self.the_soup_.title else "No title found"
-        print(f"Page Title: {page_title}")
+        # print(f"Page Title: {page_title}")
         headings = self.the_soup_.find_all('h3')
         for h3_tag in headings:
             info_dict_ = {
@@ -37,39 +37,52 @@ class WebScraper:
             response.raise_for_status()  # Check if the request was successful
             if response.status_code == 200:
                 self.html_content = response.text
-                print(f"Successfully fetched the page: {self.website_url + self.page_url}")
+                # print(f"Successfully fetched the page: {self.website_url + self.page_url}")
         except requests.exceptions.RequestException as e:
             print(f"Error fetching the page: {e}")
             
     def get_articles_info(self):
+        count_ = 0
             # an_element_ = self.all_info_dict_[2]
         for an_element_ in self.all_info_dict_:
             this_link_ =  an_element_['link'][0]
-            print(f"Fetching article from link: {this_link_}")
+            # print(f"Fetching article from link: {this_link_}")
             response = requests.get(this_link_)
             if response.status_code == 200: 
                 article_soup = soup(response.text, 'html.parser')
                 article_title = article_soup.title.text.strip() if article_soup.title else "No title found"
-                print(f"Article Title: {article_title}")
+                # print(f"Article Title: {article_title}")
                 article_paragraphs = article_soup.find_all('p')
                 for para in article_paragraphs:
-                    print(f"Paragraph: {para.text.strip()}")
+                    # print(f"Paragraph: {para.text.strip()}")
                     an_element_["paragraph_article_"].append(para.text.strip())
-
+            # count_+=1
+            # print(count_, 5*'-->>',this_link_)
+            # print(10*'.._-->', an_element_["paragraph_article_"])
     def scrape(self):
         self.requests_get_page_content_()
         soup_page = soup(self.html_content, 'html.parser')
         self.the_soup_ = soup_page
         self.extract_html_data_to_dict_()    
         self.get_articles_info()
-        print(f"All extracted information: {self.all_info_dict_[3].keys()}")       
+        # print(f"All extracted information: {self.all_info_dict_[3].keys()}")       
 
 # _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-.   
 the_website_url = "https://www.nationalww2museum.org"
 the_page_url = "/war/articles"
-wbscrpr_ = WebScraper(the_website_url, the_page_url)
-print(f"Extracted information from the webpage: {wbscrpr_.all_info_dict_[0]['paragraph_article_']}")
-from db_operations_postgre_ import insert_data_into_postgre_, create_table_in_postgre_, fetch_data_from_postgre_
-create_table_in_postgre_()
-insert_data_into_postgre_(wbscrpr_.all_info_dict_)
-fetch_data_from_postgre_()
+# wbscrpr_ = WebScraper(the_website_url, the_page_url)
+# print(f"Extracted information from the webpage: {wbscrpr_.all_info_dict_[0]['paragraph_article_']}")
+from db_operations_postgre_ import insert_data_into_postgre_, create_table_in_postgre_, fetch_data_from_postgre_, fetch_col_names
+# create_table_in_postgre_()
+# print('Table created with following columns :')
+# fetch_col_names()
+# insert_data_into_postgre_(wbscrpr_.all_info_dict_)
+
+# _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-.   
+# all_rows_ = fetch_data_from_postgre_()
+# count_=0
+
+# for element in all_rows_:
+#     count_+=1
+#     print(count_,10*'>>--',element,'\n', 10*'_..>')
+
