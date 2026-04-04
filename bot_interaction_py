@@ -28,7 +28,6 @@ db_password_ = os.getenv('POSTGRE_DB_PASSWORD')
 
 #-_-_-_--_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
 generation_llm_name_= "gemini-2.5-flash" # "gemini-3.1-pro-preview"
-
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 google_embeddings = GoogleGenerativeAIEmbeddings(model="models/gemini-embedding-001", api_key=gemini_llm_key_)
 
