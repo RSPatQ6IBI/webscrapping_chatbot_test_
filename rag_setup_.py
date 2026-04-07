@@ -1,6 +1,9 @@
 
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 import numpy as np
+import os
+from dotenv import load_dotenv
+load_dotenv()
 #-_-_-_--_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
 # DEFINE COLLECTION FOR CHROMADB, TO ADD CONTENT 
 import chromadb
@@ -20,7 +23,8 @@ with open("pyproject.toml", "rb") as f:
 # Access specific fields
 generation_llm_name_ = data["gemini_llm"]["generation_model_name"]
 embedding_llm_name_ = data["gemini_llm"]["embedding_model_name"]
-gemini_llm_key_ = data["gemini_llm"]["key_value"]
+gemini_llm_key_ = os.getenv('GEMINI_API_KEY')
+
 #-_-_-_--_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
 
 def split_the_docs_(all_inp_documents):
@@ -68,13 +72,16 @@ for idx_ in range(int(len(data_from_db_)/2)):
 
 #-_-_-_--_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
 # for articles_ in arr_article_details:
+## Choosing only one article --- >>> 
 articles_ = arr_article_details[0]
 heading_ = arr_primary_key_headings_[0]
+
+## Splitting article --- >>> 
 articles_splits_ = split_the_docs_(articles_)
 page_heading_embedvec_ = get_embeddings_for_text_(heading_)
-print(f"PAGE HEADING EMBEDDINGS --- >>> ", len(page_heading_embedvec_[0]))
+# print(f"PAGE HEADING EMBEDDINGS --- >>> ", len(page_heading_embedvec_[0]))
 this_metadata_ = [{"source": "title_heading"}]
-this_id_ = [ "id_0.001" ]
+this_id_ = [ "id_00" ]
 chroma_collection.upsert(
     embeddings = page_heading_embedvec_[0],
     documents = [heading_],
@@ -87,15 +94,15 @@ count_ = 0.0
 for a_split_ in articles_splits_:
     # print(type(str(a_split_)))
     split_embeddings_ = get_embeddings_for_text_(str(a_split_))
-    print(f"SPLIT EMBEDDINGS --- >>> ", len(split_embeddings_[0]))
+    # print(f"SPLIT EMBEDDINGS --- >>> ", len(split_embeddings_[0]))
 
     if len(this_splits_embeddings_)==0:
         this_splits_embeddings_ = split_embeddings_[0]
     else:
         this_splits_embeddings_ = np.vstack([this_splits_embeddings_, split_embeddings_[0]])
-    count_+=0.1
-    this_metadata_ = [{'source':'para_details'}]
-    this_id_ = [ "id_"+str(float(count_+0.1)) ]
+    count_+=1
+    this_metadata_ = [{'source':'para_details'+str(float(count_+1)) }]
+    this_id_ = [ "id_"+str(float(count_+1)) ]
     chroma_collection.upsert(
         embeddings = split_embeddings_[0],
         documents = [str(a_split_)],

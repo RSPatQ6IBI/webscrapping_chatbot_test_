@@ -9,6 +9,6 @@ db_user = "postgres"
 
 [gemini_llm]
 generation_model_name = "gemini-2.5-flash"
-embedding_model_name = "gemini-embedding-001"
+embedding_model_name = "models/gemini-embedding-001"
 
 [openai]
