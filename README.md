@@ -1,7 +1,7 @@
 Maintaining a production RAG system requires a multi-level evaluation framework 
--- that separates retrieval from generation, 
--- continuous data pipeline updates (ingestion, restructuring, and chunking), 
--- monitoring system latency and accuracy 
++ that separates retrieval from generation, 
++ continuous data pipeline updates (ingestion, restructuring, and chunking), 
++ monitoring system latency and accuracy 
 
 Key steps involve tracking retrieval metrics (e.g., hit rate) and generation metrics (e.g., faithfulness to context), while implementing re-ranking and user feedback loops to improve reliability over time
 
